@@ -1,0 +1,8 @@
+.container {
+    display: flex;  
+}
+
+:host ::ng-deep .fixed-header {
+    flex: 1 1 ;
+    width: 100%;
+}

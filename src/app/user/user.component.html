@@ -1,0 +1,60 @@
+<div class="main-container">
+    <div class="add-user-container">
+        <mat-card class="register-card">
+            <mat-card-header class="header-align">
+                <mat-card-title> Create User </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form (ngSubmit)="submit()" #f="ngForm" novalidate style="justify-content: space-between;">
+                    <mat-form-field class="full-width">
+                        <mat-label> First Name: </mat-label>
+                        <input matInput id="fName" name="fName" [(ngModel)]="user.fName">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <mat-label> Last Name: </mat-label>
+                        <input matInput id="lName" name="lName" [(ngModel)]="user.lName">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <mat-label>Employee ID: </mat-label>
+                        <input matInput id="empID" name="empID" [(ngModel)]="user.empID">
+                    </mat-form-field>
+                </form>
+                <div class="align-button">
+                    <div><span class="text-success font-weight-bold"
+                            *ngIf="successMessage">{{successMessage}}</span><span class="text-danger font-weight-bold"
+                            *ngIf="failureMessage">{{failureMessage}}</span></div>
+                    <div><button mat-raised-button color="primary" type="submit" [disabled]="!f.valid"
+                            [ngStyle]="{'display':display}" (click)="onAdd(user)">Add</button> </div>
+                    <div><button mat-raised-button (click)="onReset()" [ngStyle]="{'display':display}" color="warn">
+                            Reset </button> </div>
+                    <div><button mat-raised-button (click)="onUpdate(user)" [ngStyle]="{'display':displayUpdate}"
+                            color="accent"> Update </button> </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div id="userList" class="edit-user-container">
+        <mat-card>
+            <mat-card-header class="header-align">
+                <mat-card-title> Update User </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item *ngFor="let user of retrievedUsers">
+                        <div matLine style="display: inline-flex;  justify-content: flex-end;">
+                            <div> {{user.fName}} | {{user.lName}} | {{user.empID}}
+                            </div>
+                            <div>
+                                <button mat-raised-button color="primary" style="margin-left: 25px;"
+                                    (click)="onEditUser(user)">Edit</button>
+                                <button mat-raised-button color="warn" style="margin-left: 25px;"
+                                    (click)="onDelete(user)">Delete</button>
+                            </div>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
